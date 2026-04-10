@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Lupex Space Pvt Ltd — Building India's largest aerospace innovation ecosystem. Empowering 1,00,000+ students with practical space technology skills."/>
+  <meta name="keywords" content="aerospace education India, space lab, STEM, Lupex Space, aerospace training"/>
+  <meta property="og:title" content="Lupex Space — India's Aerospace Innovation Ecosystem"/>
+  <meta property="og:description" content="Training 1,00,000+ students. Setting up 200+ school & college labs. India's space future starts here."/>
+  <meta property="og:type" content="website"/>
+  <title>Lupex Space Pvt Ltd — India's Aerospace Frontier</title>
+
+  <!-- Fonts: Clash Display (display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600;1,700&display=swap" rel="stylesheet"/>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body class="is-loading">
+
+<!-- ░░ GRAIN OVERLAY ░░ -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ░░ CURSOR ░░ -->
+<div id="cursor-dot" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+
+<!-- ░░ PAGE PROGRESS ░░ -->
+<div class="page-progress" id="pageProgress" aria-hidden="true"></div>
+
+<!-- ░░ MUSIC PLAYER ░░ -->
+<div class="music-player" id="musicPlayer" title="Toggle ambient music">
+  <button class="mp-btn" id="mpBtn" aria-label="Play ambient music">
+    <svg class="mp-icon mp-icon--play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    <svg class="mp-icon mp-icon--pause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    <span class="mp-waves" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i>
+    </span>
+  </button>
+  <audio id="bgAudio" loop preload="none">
+    <!-- Royalty-free space ambient — swap src for your own file -->
+    <source src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg"/>
+  </audio>
+</div>
+
+<!-- ░░ LOADER ░░ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <div class="loader-logo">
+      <span>L</span><span>U</span><span>P</span><span>E</span><span class="accent">X</span>
+    </div>
+    <div class="loader-bar-wrap">
+      <div class="loader-bar" id="loaderBar"></div>
+    </div>
+    <div class="loader-status" id="loaderStatus">Initializing</div>
+  </div>
+</div>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░░░
+     NAVIGATION
+░░░░░░░░░░░░░░░░░░░░░░░░ -->
+<header class="nav" id="nav">
+  <a href="#" class="nav-logo" aria-label="Lupex Space">
+    <svg class="logo-mark" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+      <circle cx="18" cy="18" r="16" stroke="currentColor" stroke-width="1.4"/>
+      <circle cx="18" cy="18" r="5.5" fill="currentColor"/>
+      <line x1="18" y1="2" x2="18" y2="12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="18" y1="24" x2="18" y2="34" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="2" y1="18" x2="12" y2="18" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      <line x1="24" y1="18" x2="34" y2="18" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    </svg>
+    <span class="logo-text">LUPEX <em>SPACE</em></span>
+  </a>
+
+  <!-- Desktop nav -->
+  <nav class="nav-center" id="navCenter" aria-label="Main navigation">
+    <a href="#about" class="nav-item">About</a>
+    <a href="#mission" class="nav-item">Mission</a>
+    <a href="#services" class="nav-item">Programs</a>
+    <a href="#team" class="nav-item">Team</a>
+    <a href="#impact" class="nav-item">Impact</a>
+    <a href="#schools" class="nav-item">Partners</a>
+    <a href="#contact" class="nav-item">Contact</a>
+  </nav>
+
+  <!-- Social + CTA -->
+  <div class="nav-right">
+    <a href="https://www.instagram.com/lupexspace/" target="_blank" rel="noopener" class="nav-social" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
+    <a href="https://www.linkedin.com/company/lupex-space-pvt-ltd/posts/?feedView=all" target="_blank" rel="noopener" class="nav-social" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+        <circle cx="4" cy="4" r="2"/>
+      </svg>
+    </a>
+    <a href="#contact" class="nav-cta">Get In Touch</a>
+  </div>
+
+  <!-- Hamburger -->
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span class="hb-bar"></span>
+    <span class="hb-bar"></span>
+    <span class="hb-bar"></span>
+  </button>
+</header>
+
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="mm-inner">
+    <nav class="mm-nav" aria-label="Mobile navigation">
+      <a href="#about"    class="mm-link" data-close>About</a>
+      <a href="#mission"  class="mm-link" data-close>Mission</a>
+      <a href="#services" class="mm-link" data-close>Programs</a>
+      <a href="#team"     class="mm-link" data-close>Team</a>
+      <a href="#impact"   class="mm-link" data-close>Impact</a>
+      <a href="#schools"  class="mm-link" data-close>Partners</a>
+      <a href="#contact"  class="mm-link" data-close>Contact</a>
+    </nav>
+    <div class="mm-footer">
+      <a href="https://www.instagram.com/lupexspace/" target="_blank" rel="noopener" class="mm-social">Instagram</a>
+      <a href="https://www.linkedin.com/company/lupex-space-pvt-ltd/" target="_blank" rel="noopener" class="mm-social">LinkedIn</a>
+      <a href="mailto:info@lupexspace.com" class="mm-social">Email</a>
+    </div>
+  </div>
+</div>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░░░
+     HERO
+░░░░░░░░░░░░░░░░░░░░░░░░ -->
+<section class="hero" id="hero">
+  <canvas id="cosmos" aria-hidden="true"></canvas>
+
+  <!-- Ambient light orbs -->
+  <div class="orb orb-a" aria-hidden="true"></div>
+  <div class="orb orb-b" aria-hidden="true"></div>
+  <div class="orb orb-c" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <div class="hero-pill reveal" data-delay="0">
+      <span class="pill-pulse"></span>
+      Est. 2025 &nbsp;·&nbsp; Formerly Mach One India
+    </div>
+
+    <h1 class="hero-h1 reveal" data-delay="120">
+      <span class="line">Building</span>
+      <span class="line"><span class="shimmer-text">India's Space</span></span>
+      <span class="line italic-serif">Education Future</span>
+    </h1>
+
+    <p class="hero-sub reveal" data-delay="260">
+      We establish aerospace labs, deliver expert training,<br class="d-br"/>
+      and guide students from curiosity to the cosmos.
+    </p>
+
+    <div class="hero-btns reveal" data-delay="380">
+      <a href="#mission" class="btn-primary">
+        <span>Explore Mission</span>
+        <svg viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 6l5 4-5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#contact" class="btn-outline">Partner With Us</a>
+    </div>
+  </div>
+
+  <!-- Stats glass bar -->
+  <div class="hero-stats reveal" data-delay="480">
+    <div class="hs-item">
+      <strong data-count="100000">—</strong>
+      <span>Students&nbsp;Targeted</span>
+    </div>
+    <div class="hs-div" aria-hidden="true"></div>
+    <div class="hs-item">
+      <strong data-count="200">—</strong>
+      <span>Schools &amp;&nbsp;Colleges</span>
+    </div>
+    <div class="hs-div" aria-hidden="true"></div>
+    <div class="hs-item">
+      <strong>5</strong>
+      <span>Year&nbsp;Roadmap</span>
+    </div>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="hs-line"><div class="hs-dot"></div></div>
+    <span>Scroll to explore</span>
+  </div>
+</section>
+
+<!-- ░░ MARQUEE BAND ░░ -->
+<div class="marquee-band" aria-hidden="true">
+  <div class="marquee-track" id="marqueeTrack">
+    <span>Space Lab Setup</span><span class="sep">✦</span>
+    <span>Aerospace Training</span><span class="sep">✦</span>
+    <span>Innovation Ecosystem</span><span class="sep">✦</span>
+    <span>Research Support</span><span class="sep">✦</span>
+    <span>Student Missions</span><span class="sep">✦</span>
+    <span>Hands-On Learning</span><span class="sep">✦</span>
+    <span>Space Lab Setup</span><span class="sep">✦</span>
+    <span>Aerospace Training</span><span class="sep">✦</span>
+    <span>Innovation Ecosystem</span><span class="sep">✦</span>
+    <span>Research Support</span><span class="sep">✦</span>
+    <span>Student Missions</span><span class="sep">✦</span>
+    <span>Hands-On Learning</span><span class="sep">✦</span>
+  </div>
+</div>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░░░
+     ABOUT
+░░░░░░░░░░░░░░░░░░░░░░░░ -->
+<section class="section about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left">
+        <p class="eyebrow reveal">Who We Are</p>
+        <h2 class="reveal" data-delay="80">
+          Pioneering the next generation of <em>space leaders</em>
+        </h2>
+        <p class="body-text reveal" data-delay="140">
+          Lupex Space Pvt Ltd (formerly Mach One India) is on a singular mission: to democratize aerospace education across every school and college in India. We don't just teach theory — we build real labs, deliver expert training, and create hands-on aerospace experiences that transform students into builders.
+        </p>
+        <p class="body-text reveal" data-delay="180">
+          Founded in 2025, we are the bridge between India's 1.5 million schools and the boundless frontier of space. Every institution we enter becomes a launchpad for the next generation of aerospace innovators.
+        </p>
+        <div class="about-chips reveal" data-delay="240">
+          <span>Est. 2025</span>
+          <span>India-First</span>
+          <span>Student-Led</span>
+          <span>Mission-Driven</span>
+        </div>
+      </div>
+
+      <!-- 3D Orbital Ring System -->
+      <div class="about-right reveal" data-delay="100">
+        <div class="orbital-system" id="orbitalSystem" aria-hidden="true">
+          <div class="os-core">
+            <div class="os-glow"></div>
+            <div class="os-inner">
+              <span>LUPEX</span>
+            </div>
+          </div>
+          <!-- Ring 1 -->
+          <div class="os-ring ring-1">
+            <div class="os-planet p1"></div>
+          </div>
+          <!-- Ring 2 -->
+          <div class="os-ring ring-2">
+            <div class="os-planet p2"></div>
+          </div>
+          <!-- Ring 3 -->
+          <div class="os-ring ring-3">
+            <div class="os-planet p3"></div>
+          </div>
+          <!-- Grid lines -->
+          <div class="os-cross" aria-hidden="true">
+            <div></div><div></div>
+          </div>
+          <!-- Radar sweep -->
+          <div class="os-radar" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░░░
+     MISSION & VISION
+░░░░░░░░░░░░░░░░░░░░░░░░ -->
+<section class="section mission" id="mission">
+  <div class="container">
+    <p class="eyebrow reveal tc">Mission &amp; Vision</p>
+    <h2 class="reveal tc" data-delay="80">Built on a <em>singular purpose</em></h2>
+
+    <div class="mv-cards">
+      <div class="mv-card reveal" data-delay="0">
+        <div class="mvc-header">
+          <div class="mvc-icon">
+            <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="16" stroke="currentColor" stroke-width="1.2"/><circle cx="20" cy="20" r="6" stroke="currentColor" stroke-width="1.2"/><line x1="20" y1="4" x2="20" y2="14" stroke="currentColor" stroke-width="1.2"/><line x1="20" y1="26" x2="20" y2="36" stroke="currentColor" stroke-width="1.2"/><line x1="4" y1="20" x2="14" y2="20" stroke="currentColor" stroke-width="1.2"/><line x1="26" y1="20" x2="36" y2="20" stroke="currentColor" stroke-width="1.2"/></svg>
+          </div>
+          <span class="mvc-tag">Mission</span>
+        </div>
+        <h3>Build India's aerospace innovation ecosystem</h3>
+        <p>Empower students with practical space technology skills that bridge the gap between classroom theory and real-world aerospace applications.</p>
+      </div>
+
+      <div class="mv-card mv-card--featured reveal" data-delay="120">
+        <div class="mvc-header">
+          <div class="mvc-icon">
+            <svg viewBox="0 0 40 40" fill="none"><polygon points="20,3 38,36 2,36" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><line x1="20" y1="16" x2="20" y2="27" stroke="currentColor" stroke-width="1.2"/><circle cx="20" cy="31" r="1.5" fill="currentColor"/></svg>
+          </div>
+          <span class="mvc-tag">Vision</span>
+        </div>
+        <h3>Train <mark>1,00,000+ students</mark> across <mark>200+ institutions</mark></h3>
+        <p>Making India a global hub of grassroots aerospace innovation — one lab, one student, one breakthrough at a time.</p>
+        <div class="mvc-glow"></div>
+      </div>
+
+      <div class="mv-card reveal" data-delay="240">
+        <div class="mvc-header">
+          <div class="mvc-icon">
+            <svg viewBox="0 0 40 40" fill="none"><rect x="6" y="6" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.2"/><rect x="22" y="6" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.2"/><rect x="6" y="22" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.2"/><rect x="22" y="22" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.2"/></svg>
+          </div>
+          <span class="mvc-tag">Approach</span>
+        </div>
+        <h3>Lab infrastructure, curriculum, and expert mentorship</h3>
+        <p>We deploy complete aerospace labs, structure the entire learning journey, and connect students with industry through real project experiences.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░░░
+     PROBLEM & SOLUTION
+░░░░░░░░░░░░░░░░░░░░░░░░ -->
+<section class="section problem" id="problem">
+  <div class="container">
+    <p class="eyebrow reveal">The Challenge</p>
+    <h2 class="reveal" data-delay="80">India has a <em>space education crisis</em></h2>
+
+    <div class="crisis-stats reveal" data-delay="140">
+      <div class="cs-item">
+        <div class="cs-num">1.5<span>M</span></div>
+        <strong>Schools in India</strong>
+        <p>Aerospace labs are nearly nonexistent</p>
+      </div>
+      <div class="cs-arrow" aria-hidden="true">→</div>
+      <div class="cs-item">
+        <div class="cs-num warn">&lt;1<span>%</span></div>
+        <strong>Have Aerospace Labs</strong>
+        <p>Critical infrastructure vacuum</p>
+      </div>
+      <div class="cs-arrow" aria-hidden="true">→</div>
+      <div class="cs-item">
+        <div class="cs-num warn2">90<span>%</span></div>
+        <strong>Theory-Only Learning</strong>
+        <p>No practical skills or exposure</p>
+      </div>
+    </div>
+
+    <div class="solution-block reveal" data-delay="100">
+      <div class="sol-text">
+        <span class="eyebrow">The Solution</span>
+        <h3>We build the lab.<br/><em>Students build the future.</em></h3>
+        <p>Lupex Space deploys fully-equipped aerospace labs inside schools and colleges — paired with structured curriculum, expert training, and industry mentorship. We transform institutions into active learning centres.</p>
+        <ul class="sol-list">
+          <li><svg viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Physical aerospace lab infrastructure</li>
+          <li><svg viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Structured aerospace curriculum</li>
+          <li><svg viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Hands-on project mentorship</li>
+          <li><svg viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Industry linkage and real-world exposure</li>
+        </ul>
+      </div>
+      <div class="sol-visual" aria-hidden="true">
+        <div class="pipeline">
+          <div class="pip-step" data-pip="0"><span class="pip-ico">📖</span><span>Theory</span></div>
+          <div class="pip-line"></div>
+          <div class="pip-step" data-pip="1"><span class="pip-ico">🔬</span><span>Lab Training</span></div>
+          <div class="pip-line"></div>
+          <div class="pip-step" data-pip="2"><span class="pip-ico">⚙️</span><span>Build Projects</span></div>
+          <div class="pip-line"></div>
+          <div class="pip-step active" data-pip="3"><span class="pip-ico">🚀</span><span>Mission Ready</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░░░
+     SERVICES
+░░░░░░░░░░░░░░░░░░░░░░░░ -->
+<section class="section services" id="services">
+  <div class="container">
+    <p class="eyebrow reveal tc">What We Offer</p>
+    <h2 class="reveal tc" data-delay="80">Programs built for <em>real outcomes</em></h2>
+
+    <div class="svc-grid">
+      <div class="svc-card reveal" data-delay="0">
+        <div class="svc-n">01</div>
+        <div class="svc-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="16" width="36" height="26" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M16 16V12a8 8 0 0116 0v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="24" cy="29" r="4" stroke="currentColor" stroke-width="1.3"/></svg>
+        </div>
+        <h3>Space Lab Setup</h3>
+        <p>End-to-end deployment of aerospace laboratories — hardware, installation, curriculum integration, and ongoing technical support for schools and colleges.</p>
+        <div class="svc-tags"><span>Infrastructure</span><span>Hardware</span><span>Curriculum</span></div>
+      </div>
+
+      <div class="svc-card reveal" data-delay="100">
+        <div class="svc-n">02</div>
+        <div class="svc-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="18" r="10" stroke="currentColor" stroke-width="1.3"/><path d="M8 44c0-8.84 7.16-16 16-16s16 7.16 16 16" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Aerospace Training</h3>
+        <p>Expert-led workshops in aerodynamics, orbital mechanics, avionics, and mission design. Bridging the gap between academic theory and real-world aerospace skills.</p>
+        <div class="svc-tags"><span>Workshops</span><span>Bootcamps</span><span>Mentorship</span></div>
+      </div>
+
+      <div class="svc-card svc-card--hero reveal" data-delay="200">
+        <div class="svc-n">03</div>
+        <div class="svc-badge">Flagship</div>
+        <div class="svc-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none"><path d="M24 6L28 18H40L30 26L34 38L24 30L14 38L18 26L8 18H20L24 6Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Aerospace Project Programs</h3>
+        <p>Guiding student teams through complete aerospace projects — from initial design and simulation to full build and real-world demonstration missions.</p>
+        <div class="svc-tags"><span>Project Design</span><span>Simulation</span><span>Demo Missions</span></div>
+        <div class="svc-glow" aria-hidden="true"></div>
+      </div>
+
+      <div class="svc-card reveal" data-delay="300">
+        <div class="svc-n">04</div>
+        <div class="svc-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="1.3"/><path d="M24 8v32M8 24h32" stroke="currentColor" stroke-width="1.3"/><ellipse cx="24" cy="24" rx="8" ry="16" stroke="currentColor" stroke-width="1"/></svg>
+        </div>
+        <h3>Research &amp; Innovation</h3>
+        <p>Connecting students with industry experts and research bodies to transform academic curiosity into publishable, real-world aerospace innovation.</p>
+        <div class="svc-tags"><span>R&amp;D</span><span>Industry Links</span><span>Publications</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░░░
+     TEAM / FOUNDERS
+░░░░░░░░░░░░░░░░░░░░░░░░ -->
+<section class="section team" id="team">
+  <div class="team-stars" aria-hidden="true"></div>
+  <div class="container">
+    <p class="eyebrow reveal tc">The People</p>
+    <h2 class="reveal tc" data-delay="80">Meet our <em>founding team</em></h2>
+    <p class="section-sub reveal tc" data-delay="140">Driven by a shared belief that every student in India deserves access to world-class aerospace education.</p>
+
+    <div class="founders-row">
+
+      <!-- ── Aditya Singh — Founder ── -->
+      <div class="founder-card founder-card--center reveal" data-delay="0">
+        <div class="fc-orbit-wrap" aria-hidden="true">
+          <div class="fc-orbit fc-orbit-1"></div>
+          <div class="fc-orbit fc-orbit-2"></div>
+        </div>
+        <div class="fc-photo-ring">
+          <div class="fc-ring-glow"></div>
+          <div class="fc-photo" style="background:linear-gradient(135deg,#1a2a3a 0%,#0d1520 100%)">
+            <img src="team/Aditya.jpeg" alt="Aditya Singh" class="fc-img"/>
+            <!--
+              PHOTO INSTRUCTIONS — Aditya Singh:
+              Replace the gradient background above with:
+              background-image: url('team/aditya.jpg');
+              background-size: cover; background-position: center top;
+              Or use: <img src="team/aditya.jpg" alt="Aditya Singh" class="fc-img"/>
+            -->
+            <!-- <div class="fc-initials">AS</div> -->
+          </div>
+          <div class="fc-hover-ring"></div>
+        </div>
+        <div class="fc-info">
+          <h3 class="fc-name">ADITYA SINGH</h3>
+          <span class="fc-role fc-role--accent">Founder &amp; CEO</span>
+          <p class="fc-bio">Visionary leader building India's aerospace education infrastructure from the ground up.<br>B.Tech Mechanical Engineering, GNDEC, Ludhiana. Research intern at SAC ISRO Ahmedabad. Author of 5 research articles in Metal Matrix Composites.</br></p>
+          <div class="fc-links">
+            <a href="https://www.linkedin.com/company/lupex-space-pvt-ltd/" target="_blank" rel="noopener" class="fc-social" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://www.instagram.com/lupexspace/" target="_blank" rel="noopener" class="fc-social" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="fc-number" aria-hidden="true">01</div>
+      </div>
+
+      <!-- ── Venkat Rana — Co-Founder ── -->
+      <div class="founder-card founder-card--center reveal" data-delay="160">
+        <div class="fc-orbit-wrap" aria-hidden="true">
+          <div class="fc-orbit fc-orbit-1"></div>
+          <div class="fc-orbit fc-orbit-2"></div>
+        </div>
+        <div class="fc-photo-ring fc-photo-ring--accent">
+          <div class="fc-ring-glow fc-ring-glow--accent"></div>
+          <div class="fc-photo" style="background:linear-gradient(135deg,#0f2215 0%,#091510 100%)">
+            <img src="team/venkat rana.jpeg" alt="Venkat Rana" class="fc-img"/>
+            <!--
+              PHOTO INSTRUCTIONS — Venkat Rana:
+              Replace gradient with:
+              background-image: url('team/venkat.jpg');
+              background-size: cover; background-position: center top;
+            -->
+            <!-- <div class="fc-initials">VR</div> -->
+          </div>
+          <div class="fc-hover-ring"></div>
+        </div>
+        <div class="fc-info">
+          <h3 class="fc-name">VENKAT RANA</h3>
+          <span class="fc-role fc-role--accent">Co-Founder</span>
+          <p class="fc-bio">Strategic architect driving institutional partnerships and scaling Lupex's reach nationwide. <br> B.Tech Mechanical Engineering, GNDEC, Ludhiana. Industrial experience in automotive parts manufacturing and mechanical design.</br></p>
+          <div class="fc-links">
+            <a href="https://www.linkedin.com/company/lupex-space-pvt-ltd/" target="_blank" rel="noopener" class="fc-social" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://www.instagram.com/lupexspace/" target="_blank" rel="noopener" class="fc-social" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="fc-number" aria-hidden="true">02</div>
+      </div>
+
+      <!-- ── Ayush Raj Gupta — Tech Specialist ── -->
+      <div class="founder-card founder-card--center reveal" data-delay="320">
+        <div class="fc-orbit-wrap" aria-hidden="true">
+          <div class="fc-orbit fc-orbit-1"></div>
+          <div class="fc-orbit fc-orbit-2"></div>
+        </div>
+        <div class="fc-photo-ring">
+          <div class="fc-ring-glow"></div>
+          <div class="fc-photo" style="background:linear-gradient(135deg,#1a2a1a 0%,#0d1510 100%)">
+            <img src="team/Ayush.jpeg" alt="Venkat Rana" class="fc-img"/>
+            <!--
+              PHOTO INSTRUCTIONS — Ayush Raj Gupta:
+              Replace gradient with:
+              background-image: url('team/ayush.jpg');
+              background-size: cover; background-position: center top;
+            -->
+            <!-- <div class="fc-initials">AG</div> -->
+          </div>
+          <div class="fc-hover-ring"></div>
+        </div>
+        <div class="fc-info">
+          <h3 class="fc-name">AYUSH RAJ GUPTA</h3>
+          <span class="fc-role fc-role--accent">Technology Specialist</span>
+          <p class="fc-bio">Aerospace engineer powering the technical foundation of every lab and training program. <br> B.Tech Information Technology, BBDNIIT, Lucknow. Data analytics &amp; visualisation expert. Data Scientist internship at DevTown, Bangalore.</br></p>
+          <div class="fc-links">
+            <a href="https://www.linkedin.com/company/lupex-space-pvt-ltd/" target="_blank" rel="noopener" class="fc-social" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://www.instagram.com/lupexspace/" target="_blank" rel="noopener" class="fc-social" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="fc-number" aria-hidden="true">03</div>
+      </div>
+
+      <!-- ── Dr. Jatinder Pal ── -->
+      <div class="founder-card founder-card--center reveal" data-delay="160">
+        <div class="fc-orbit-wrap" aria-hidden="true">
+          <div class="fc-orbit fc-orbit-1"></div>
+          <div class="fc-orbit fc-orbit-2"></div>
+        </div>
+        <div class="fc-photo-ring fc-photo-ring--accent">
+          <div class="fc-ring-glow fc-ring-glow--accent"></div>
+          <div class="fc-photo" style="background:linear-gradient(135deg,#0f2215 0%,#091510 100%)">
+            <img src="team/Jatinder pal.jpeg" alt="Jatinder pal" class="fc-img"/>
+            <!--
+              PHOTO INSTRUCTIONS — Venkat Rana:
+              Replace gradient with:
+              background-image: url('team/venkat.jpg');
+              background-size: cover; background-position: center top;
+            -->
+            <!-- <div class="fc-initials">VR</div> -->
+          </div>
+          <div class="fc-hover-ring"></div>
+        </div>
+        <div class="fc-info">
+          <h3 class="fc-name">Dr.  JATINDER PAL</h3>
+          <span class="fc-role fc-role--accent">Expert Guidance</span>
+          <p class="fc-bio">Assistant Professor, GNDEC Engineering College. Ph.D. Metal Matrix Composites, Thapar Institute. Author of multiple international publications & book chapters.</p>
+          <div class="fc-links">
+            <a href="https://www.linkedin.com/company/lupex-space-pvt-ltd/" target="_blank" rel="noopener" class="fc-social" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://www.instagram.com/lupexspace/" target="_blank" rel="noopener" class="fc-social" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="fc-number" aria-hidden="true">04</div>
+      </div>
+
+      <!-- ── Shreya Runthala ── -->
+      <div class="founder-card founder-card--center reveal" data-delay="160">
+        <div class="fc-orbit-wrap" aria-hidden="true">
+          <div class="fc-orbit fc-orbit-1"></div>
+          <div class="fc-orbit fc-orbit-2"></div>
+        </div>
+        <div class="fc-photo-ring fc-photo-ring--accent">
+          <div class="fc-ring-glow fc-ring-glow--accent"></div>
+          <div class="fc-photo" style="background:linear-gradient(135deg,#0f2215 0%,#091510 100%)">
+            <img src="team/Shreya.jpeg" alt="Shreya Runthala" class="fc-img"/>
+
+            <!-- <div class="fc-initials">VR</div> -->
+          </div>
+          <div class="fc-hover-ring"></div>
+        </div>
+        <div class="fc-info">
+          <h3 class="fc-name">SHREYA RUNTHALA</h3>
+          <span class="fc-role fc-role--accent">AI-ML Expert</span>
+          <p class="fc-bio">B.Sc. Physics &amp; Mathematics, VIT Chennai. 2.5+ years as STEM Educator. 1+ year experience as AI/ML Engineer.</p>
+          <div class="fc-links">
+            <a href="https://www.linkedin.com/company/lupex-space-pvt-ltd/" target="_blank" rel="noopener" class="fc-social" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://www.instagram.com/lupexspace/" target="_blank" rel="noopener" class="fc-social" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="fc-number" aria-hidden="true">05</div>
+      </div>
+
+    </div><!-- /founders-row -->
+
+    <!-- Photo swap instruction banner -->
+    <!-- <div class="team-photo-guide reveal" data-delay="200"> -->
+      <!-- /<svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><line x1="8" y1="7" x2="8" y2="11" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="8" cy="5" r=".8" fill="currentColor"/></svg> -->
+      <!-- <span>To add real photos: in each card, set <code>background-image: url('team/aditya.jpg')</code> on the <code>.fc-photo</code> div and remove the <code>.fc-initials</code> span.</span> -->
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░░░
+     IMPACT
+░░░░░░░░░░░░░░░░░░░░░░░░ -->
+<section class="section impact" id="impact">
+  <div class="impact-glow" aria-hidden="true"></div>
+  <div class="container">
+    <p class="eyebrow reveal tc">Scale &amp; Impact</p>
+    <h2 class="reveal tc" data-delay="80">Numbers that <em>define the mission</em></h2>
+
+    <div class="impact-grid">
+      <div class="ig-tile reveal" data-delay="0">
+        <div class="igt-val"><span data-count="1500000">—</span></div>
+        <div class="igt-label">Schools in India</div>
+        <div class="igt-sub">Our total addressable market</div>
+      </div>
+      <div class="ig-tile reveal" data-delay="80">
+        <div class="igt-val"><span data-count="45000">—</span></div>
+        <div class="igt-label">Colleges</div>
+        <div class="igt-sub">Higher education institutions</div>
+      </div>
+      <div class="ig-tile ig-tile--accent reveal" data-delay="160">
+        <div class="igt-val">1L<span class="igt-plus">+</span></div>
+        <div class="igt-label">Students</div>
+        <div class="igt-sub">5-year training target</div>
+      </div>
+      <div class="ig-tile reveal" data-delay="240">
+        <div class="igt-val">200<span class="igt-plus">+</span></div>
+        <div class="igt-label">Institutions</div>
+        <div class="igt-sub">Lab deployment goal</div>
+      </div>
+    </div>
+
+    <blockquote class="impact-quote reveal" data-delay="80">
+      "India's space economy is projected to reach $44 billion by 2033. The talent pipeline starts in the classroom — and that's exactly where we begin."
+    </blockquote>
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░░░
+     COLLABORATED SCHOOLS
+░░░░░░░░░░░░░░░░░░░░░░░░ -->
+<section class="section schools" id="schools">
+  <div class="container">
+    <p class="eyebrow reveal tc">Our Partners</p>
+    <h2 class="reveal tc" data-delay="80">Collaborated <em>institutions</em></h2>
+    <p class="section-sub reveal tc" data-delay="140">Schools and colleges that have taken the first step toward becoming aerospace innovation hubs.</p>
+
+    <div class="schools-grid">
+      <!-- School Card 1 — Active -->
+      <div class="school-card reveal" data-delay="0">
+        <div class="sc-logo-wrap">
+          <div class="sc-logo-placeholder" aria-label="SND Public School logo">
+            <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
+              <rect x="10" y="20" width="60" height="48" rx="3" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M10 36h60M30 20V12M50 20V12M20 52h10M50 52h10M30 52h20" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            <img src="team/logo.png" alt="SND Public School"/>
+          </div>
+          <a href="https://sndpublicschool.org/" target="_blank" rel="noopener"
+               class="sc-overlay" aria-label="Visit SND Public School website">
+            <span>View Profile →</span>
+          </a>
+        </div>
+        <div class="sc-info">
+          <h4>SND Public School</h4>
+          <p>Palwal, Haryana</p>
+          <span class="sc-status active">Active Partner</span>
+        </div>
+      </div>
+
+      <!-- Placeholder cards for future schools -->
+      <div class="school-card school-card--future reveal" data-delay="100">
+        <div class="sc-logo-wrap">
+          <div class="sc-logo-placeholder sc-future">
+            <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="24" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4"/><line x1="40" y1="28" x2="40" y2="52" stroke="currentColor" stroke-width="1.2"/><line x1="28" y1="40" x2="52" y2="40" stroke="currentColor" stroke-width="1.2"/></svg>
+          </div>
+        </div>
+        <div class="sc-info">
+          <h4>Your School</h4>
+          <p>Be our next partner</p>
+          <a href="#contact" class="sc-status join">Join Program →</a>
+        </div>
+      </div>
+
+      <div class="school-card school-card--future reveal" data-delay="200">
+        <div class="sc-logo-wrap">
+          <div class="sc-logo-placeholder sc-future">
+            <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="24" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4"/><line x1="40" y1="28" x2="40" y2="52" stroke="currentColor" stroke-width="1.2"/><line x1="28" y1="40" x2="52" y2="40" stroke="currentColor" stroke-width="1.2"/></svg>
+          </div>
+        </div>
+        <div class="sc-info">
+          <h4>Your College</h4>
+          <p>Bring aerospace to your campus</p>
+          <a href="#contact" class="sc-status join">Join Program →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░░░
+     ROADMAP
+░░░░░░░░░░░░░░░░░░░░░░░░ -->
+<section class="section roadmap" id="roadmap">
+  <div class="container">
+    <p class="eyebrow reveal tc">Roadmap</p>
+    <h2 class="reveal tc" data-delay="80">Building toward <em>India's aerospace horizon</em></h2>
+
+    <div class="timeline">
+      <div class="tl-spine" aria-hidden="true"></div>
+
+      <div class="tl-row reveal" data-delay="0">
+        <div class="tl-year">2026</div>
+        <div class="tl-node" aria-hidden="true"><div class="tln-dot"></div></div>
+        <div class="tl-card">
+          <h4>Foundation Phase</h4>
+          <p>Launch first 10 aerospace labs. Establish curriculum framework. Complete pilot cohort of 500 students in Tier 1 cities.</p>
+        </div>
+      </div>
+
+      <div class="tl-row reveal" data-delay="120">
+        <div class="tl-year">2027</div>
+        <div class="tl-node" aria-hidden="true"><div class="tln-dot"></div></div>
+        <div class="tl-card">
+          <h4>Scale Phase</h4>
+          <p>Expand to 50+ institutions. Launch certified aerospace curriculum. Reach 20,000 trained students milestone.</p>
+        </div>
+      </div>
+
+      <div class="tl-row reveal" data-delay="240">
+        <div class="tl-year">2028</div>
+        <div class="tl-node" aria-hidden="true"><div class="tln-dot"></div></div>
+        <div class="tl-card">
+          <h4>National Expansion</h4>
+          <p>Labs in every Indian state. Partner with government bodies and corporates. 200+ institutions. 50,000 students trained.</p>
+        </div>
+      </div>
+
+      <div class="tl-row reveal" data-delay="360">
+        <div class="tl-year">2030</div>
+        <div class="tl-node tl-node--future" aria-hidden="true"><div class="tln-dot"></div></div>
+        <div class="tl-card tl-card--future">
+          <h4>Mission Milestone 🎯</h4>
+          <p>200+ active aerospace labs. 1,00,000 trained students. India's largest aerospace education ecosystem fully operational.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░░░
+     CONTACT
+░░░░░░░░░░░░░░░░░░░░░░░░ -->
+<section class="section contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-left">
+        <p class="eyebrow reveal">Get In Touch</p>
+        <h2 class="reveal" data-delay="80">Ready to bring aerospace <em>to your campus?</em></h2>
+        <p class="body-text reveal" data-delay="140">Whether you represent a school, college, government body, or are an investor who believes in India's aerospace future — we want to hear from you.</p>
+
+        <div class="contact-details reveal" data-delay="180">
+          <a href="mailto:info@lupexspace.com" class="cd-link">
+            <div class="cd-icon"><svg viewBox="0 0 20 20" fill="none"><path d="M3 4h14a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1z" stroke="currentColor" stroke-width="1.3"/><path d="M2 5.5l8 5.5 8-5.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+            <div><span>Email</span><strong>info@lupexspace.com</strong></div>
+          </a>
+          <a href="https://www.instagram.com/lupexspace/" target="_blank" rel="noopener" class="cd-link">
+            <div class="cd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg></div>
+            <div><span>Instagram</span><strong>@lupexspace</strong></div>
+          </a>
+          <a href="https://www.linkedin.com/company/lupex-space-pvt-ltd/" target="_blank" rel="noopener" class="cd-link">
+            <div class="cd-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></div>
+            <div><span>LinkedIn</span><strong>Lupex Space Pvt Ltd</strong></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Contact Form — EmailJS powered -->
+      <div class="contact-right reveal" data-delay="100">
+        <form class="contact-form" id="contactForm" novalidate>
+          <!-- <div class="cf-note"> -->
+            <!-- <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.2"/><line x1="8" y1="7" x2="8" y2="11" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="5" r="0.8" fill="currentColor"/></svg> -->
+            <!-- Messages are sent directly to <strong>info@lupexspace.com</strong> via EmailJS -->
+          <!-- </div> -->
+
+          <div class="cf-row">
+            <div class="cf-group">
+              <label for="cf-name">Full Name <span>*</span></label>
+              <input id="cf-name" name="from_name" type="text" placeholder="Your name" required autocomplete="name"/>
+            </div>
+            <div class="cf-group">
+              <label for="cf-email">Email Address <span>*</span></label>
+              <input id="cf-email" name="from_email" type="email" placeholder="you@institution.edu" required autocomplete="email"/>
+            </div>
+          </div>
+
+          <div class="cf-group">
+            <label for="cf-org">Organisation</label>
+            <input id="cf-org" name="organisation" type="text" placeholder="School / College / Company name"/>
+          </div>
+
+          <div class="cf-group">
+            <label for="cf-type">I represent a…</label>
+            <div class="cf-select-wrap">
+              <select id="cf-type" name="type">
+                <option value="">Select type</option>
+                <option>School</option>
+                <option>College / University</option>
+                <option>Government Body</option>
+                <option>Investor / VC</option>
+                <option>Corporate Partner</option>
+                <option>Student / Individual</option>
+              </select>
+              <svg class="sel-arrow" viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+
+          <div class="cf-group">
+            <label for="cf-msg">Message <span>*</span></label>
+            <textarea id="cf-msg" name="message" rows="5" placeholder="Tell us about your institution and how you'd like to collaborate…" required></textarea>
+          </div>
+
+          <button type="submit" class="cf-submit" id="cfSubmit">
+            <span class="cf-submit-txt">Send Message</span>
+            <svg class="cf-submit-ico" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M11 6l5 4-5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="cf-spinner" aria-hidden="true"></span>
+          </button>
+
+          <div class="cf-feedback" id="cfFeedback" role="alert" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ░░░░░░░░░░░░░░░░░░░░░░
+     FOOTER
+░░░░░░░░░░░░░░░░░░░░░░░░ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg class="logo-mark" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+            <circle cx="18" cy="18" r="16" stroke="currentColor" stroke-width="1.4"/>
+            <circle cx="18" cy="18" r="5.5" fill="currentColor"/>
+            <line x1="18" y1="2" x2="18" y2="12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            <line x1="18" y1="24" x2="18" y2="34" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            <line x1="2" y1="18" x2="12" y2="18" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            <line x1="24" y1="18" x2="34" y2="18" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+          <span>LUPEX <em>SPACE</em></span>
+        </div>
+        <p>Building India's largest aerospace innovation ecosystem.</p>
+        <small>Formerly Mach One India · Est. 2025</small>
+        <div class="footer-socials">
+          <a href="https://www.instagram.com/lupexspace/" target="_blank" rel="noopener" aria-label="Instagram" class="fsoc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/company/lupex-space-pvt-ltd/posts/?feedView=all" target="_blank" rel="noopener" aria-label="LinkedIn" class="fsoc">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="mailto:info@lupexspace.com" aria-label="Email" class="fsoc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <div class="fn-col">
+          <strong>Company</strong>
+          <a href="#about">About Us</a>
+          <a href="#mission">Mission &amp; Vision</a>
+          <a href="#team">Our Team</a>
+          <a href="#roadmap">Roadmap</a>
+        </div>
+        <div class="fn-col">
+          <strong>Programs</strong>
+          <a href="#services">Space Lab Setup</a>
+          <a href="#services">Aerospace Training</a>
+          <a href="#services">Project Programs</a>
+          <a href="#services">Research &amp; Innovation</a>
+        </div>
+        <div class="fn-col">
+          <strong>Connect</strong>
+          <a href="#contact">Get In Touch</a>
+          <a href="#schools">Partner Schools</a>
+          <a href="mailto:info@lupexspace.com">info@lupexspace.com</a>
+          <a href="https://www.instagram.com/lupexspace/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.linkedin.com/company/lupex-space-pvt-ltd/" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2025 Lupex Space Pvt Ltd. All rights reserved.</span>
+      <span>Made in India 🇮🇳 for the cosmos</span>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
