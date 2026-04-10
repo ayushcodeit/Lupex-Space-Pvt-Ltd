@@ -1,7 +1,7 @@
 # Lupex-Space-Pvt-Ltd
 🚀 Official website for Lupex Space Pvt Ltd — India's aerospace education startup. Premium dark-theme UI with animations, team section, contact form (EmailJS), and mobile-first responsive design.
 
-🏢 About Lupex Space
+## 🏢 About Lupex Space
 Lupex Space Pvt Ltd (formerly Mach One India) was founded in 2025 with a singular 
 mission: to democratize aerospace education across every school and college in India.
 
